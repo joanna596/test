@@ -22,12 +22,26 @@
     footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}.footrow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.back{color:var(--teal);text-decoration:none;font-weight:700}
     @media(max-width:800px){.flow{grid-template-columns:1fr 1fr}.flow-card:nth-child(2):after{display:none}.span-7,.span-5,.span-6{grid-column:span 12}.nav{align-items:flex-start}.navlinks{gap:10px}.section-head{display:block}.number{display:block;margin-bottom:7px}}
     @media(max-width:540px){.wrap{width:min(100% - 24px,1120px)}.top{position:static}.nav{display:block}.brand{margin-bottom:8px}.navlinks{font-size:.82rem}.hero{padding:54px 0 42px}.flow,.learning,.sdl{grid-template-columns:1fr}.flow-card:after{display:none!important}.webmap{grid-template-columns:1fr}.web-arrow{transform:rotate(90deg)}.card{padding:19px}}
+    .listen{margin-top:22px}.listen-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .listen button{font:inherit;font-size:.9rem;border:1px solid var(--teal);border-radius:10px;padding:7px 12px;background:var(--card);color:#175d59;cursor:pointer}
+    .listen button[aria-pressed="true"]{background:#175d59;color:white}
+    .listen button:disabled{opacity:.55;cursor:default}.listen-status{color:var(--muted);font-size:.85rem}
   </style>
 </head>
 <body>
   <header class="top"><div class="wrap nav"><div class="brand">筆記整理 / 2026</div><nav class="navlinks" aria-label="頁面導覽"><a href="#ai">AI 工作流</a><a href="#web">網頁產品</a><a href="#learning">學習設計</a><a href="#sdl">自主學習</a></nav></div></header>
   <main>
-    <section class="hero"><div class="wrap"><div class="eyebrow">Handwritten notes · concept map</div><h1>AI × 網頁 × <span>學習</span></h1><p>把一張密集的腦力激盪筆記，整理成三條可以實作的路徑：讓 AI 從情境走到工具與代理流程、把想法做成可部署的網頁產品，再用主動輸入與輸出設計學習體驗。</p><div class="tags"><span class="tag">Context Engineering</span><span class="tag">Single-page app</span><span class="tag">Responsive Web Design</span><span class="tag">Self-Directed Learning</span></div></div></section>
+    <section class="hero"><div class="wrap"><div class="eyebrow">Handwritten notes · concept map</div><h1>AI × 網頁 × <span>學習</span></h1><p>把一張密集的腦力激盪筆記，整理成三條可以實作的路徑：讓 AI 從情境走到工具與代理流程、把想法做成可部署的網頁產品，再用主動輸入與輸出設計學習體驗。</p><div class="tags"><span class="tag">Context Engineering</span><span class="tag">Single-page app</span><span class="tag">Responsive Web Design</span><span class="tag">Self-Directed Learning</span></div>
+      <div class="listen" id="listen" hidden>
+        <div class="listen-actions" role="group" aria-label="語音摘要">
+          <button type="button" data-voice="zh-TW" aria-pressed="false">播放中文摘要</button>
+          <button type="button" data-voice="en-US" aria-pressed="false" lang="en">Play English summary</button>
+          <button type="button" id="listen-stop" disabled>停止</button>
+        </div>
+        <div id="listen-status" class="listen-status" role="status"></div>
+      </div>
+      <noscript>請啟用 JavaScript 以播放語音摘要。</noscript>
+    </div></section>
     <section class="section" id="ai"><div class="wrap"><div class="section-head"><div><div class="number">01 / AI WORKFLOW</div><h2>從情境到持續迭代</h2><p class="section-intro">筆記中的 AI 工程流程，核心是先準備可用的脈絡，再讓工具和代理在回饋循環中逐步完成任務。</p></div></div>
       <div class="flow"><article class="flow-card"><small>01 · Knowledge</small><h3>Session + 知識文件</h3><p>把當次對話、背景資訊與工作規則整理成可引用的上下文。</p><p><span class="pill orange">KB.md</span> <span class="pill orange">handoff.md</span> <span class="pill orange">PRD.md</span></p></article><article class="flow-card"><small>02 · Context</small><h3>Context Engineering</h3><p>設計提示詞與上下文，讓模型知道目標、限制、資料與下一步。</p></article><article class="flow-card"><small>03 · System</small><h3>Harness Engineering</h3><p>用工具、API 或 MCP connector，為模型接上可執行的能力。</p></article><article class="flow-card"><small>04 · Iteration</small><h3>Loop Engineering</h3><p>執行、檢查結果、修正，再進入下一輪；逐步提高自主程度。</p></article></div>
       <div class="grid" style="margin-top:16px"><article class="card span-7"><h3>Agent 的自主程度</h3><p>筆記把流程型自動化與更自主的代理放在同一條光譜上。可先從明確規則開始，再依任務風險和需求增加代理的決策空間。</p><div class="pipeline"><span class="step">預先定義 workflow</span><span class="arrow">→</span><span class="step">自動執行 automatic</span><span class="arrow">→</span><span class="step">自主決策 autonomous</span></div><p>可能的能力介面：<span class="pill">API</span> <span class="pill">MCP</span> <span class="pill">Tools</span> <span class="pill">Agent</span></p></article><article class="card span-5"><h3>成本與裝置情境</h3><p>使用模型時也要考慮 tokenization 帶來的用量與成本；介面則需能適應手機、平板與電腦。</p><div class="meter" aria-label="概念示意"></div><p style="font-size:.85rem">提示：依任務選模型、控制上下文長度，並在目標裝置上檢查顯示。</p></article></div>
@@ -45,5 +59,98 @@
     </div></section>
   </main>
   <footer><div class="wrap footrow"><span>依手寫筆記整理；此頁為內容重組與概念摘要，不是逐字 OCR。</span><a class="back" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">回到頁首 ↑</a></div></footer>
+  <script>
+    (() => {
+      const summaries = {
+        "zh-TW": [
+          "這份筆記介紹人工智慧工作流、網頁產品、學習設計與自主學習。",
+          "人工智慧工作流。先將對話、背景資料和規則整理成知識文件，再提供清楚的目標與限制。接上工具後，反覆執行、檢查與修正。從明確規則開始，再依任務需要提高代理的自主程度，並兼顧使用成本。",
+          "網頁產品。先寫下使用者需求和主要流程，再做出最小可行版本。從靜態頁面開始，部署到 GitHub Pages 等平台，並檢查手機和平板的版面。收集回饋後再逐步擴充。",
+          "學習設計。用閱讀、聆聽與音訊摘要建立理解，再用口說、寫作、字卡與測驗練習。透過形成性評量找出需要加強的地方。",
+          "自主學習。先設定目標，再選擇方法，依練習結果調整下一輪。也可以拍攝手寫筆記，透過光學文字辨識擷取文字，整理成可搜尋的摘要與知識文件。"
+        ],
+        "en-US": [
+          "These notes cover AI workflows, web products, learning design, and self-directed learning.",
+          "AI workflows. Organize conversations, background information, and rules into reference documents. Define the goal and constraints, connect tools, then repeat a cycle of running, checking, and revising. Give agents more autonomy when the task calls for it, and manage model usage and cost.",
+          "Web products. Identify user needs and the main workflow, then build a minimum viable product. Start with a static page, publish it on a platform such as GitHub Pages, and check the layout on phones and tablets. Expand the product based on feedback.",
+          "Learning design. Build understanding through reading, listening, and audio summaries. Practice recall and expression through speaking, writing, flashcards, and quizzes. Use formative assessment to decide what needs more work.",
+          "Self-directed learning. Set goals, choose methods, and adjust based on practice results. Handwritten notes can also be photographed, converted to text with optical character recognition, and turned into searchable summaries and reference documents."
+        ]
+      };
+
+      const panel = document.querySelector("#listen");
+      const buttons = [...panel.querySelectorAll("[data-voice]")];
+      const stop = document.querySelector("#listen-stop");
+      const status = document.querySelector("#listen-status");
+      const synth = window.speechSynthesis;
+      let playback = null;
+
+      function update(active, message) {
+        buttons.forEach(button => {
+          button.setAttribute("aria-pressed", String(button.dataset.voice === active));
+        });
+        stop.disabled = !active;
+        status.textContent = message;
+      }
+
+      function cancel() {
+        playback = null;
+        synth.cancel();
+      }
+
+      panel.hidden = false;
+      if (!synth || !window.SpeechSynthesisUtterance) {
+        buttons.forEach(button => { button.disabled = true; });
+        update(null, "目前的瀏覽器不支援語音朗讀。");
+        return;
+      }
+
+      synth.getVoices();
+      buttons.forEach(button => {
+        button.addEventListener("click", () => {
+          cancel();
+          const language = button.dataset.voice;
+          const voices = synth.getVoices();
+          const voice = voices.find(item => item.lang.toLowerCase() === language.toLowerCase())
+            || voices.find(item => item.lang.toLowerCase().startsWith(language.slice(0, 2) + "-"));
+          const session = { utterance: null };
+          playback = session;
+          update(language, language === "zh-TW" ? "中文摘要播放中" : "英文摘要播放中");
+
+          function playSection(index) {
+            if (playback !== session) return;
+            if (index === summaries[language].length) {
+              playback = null;
+              update(null, "播放完畢。");
+              return;
+            }
+            const utterance = new SpeechSynthesisUtterance(summaries[language][index]);
+            utterance.lang = language;
+            if (voice) utterance.voice = voice;
+            session.utterance = utterance;
+            utterance.onend = () => playSection(index + 1);
+            utterance.onerror = () => {
+              if (playback !== session) return;
+              cancel();
+              update(null, "無法播放。請確認裝置已安裝所選語言的語音。");
+            };
+            synth.speak(utterance);
+          }
+
+          playSection(0);
+        });
+      });
+
+      stop.addEventListener("click", () => {
+        cancel();
+        update(null, "已停止播放。");
+      });
+      window.addEventListener("pagehide", () => {
+        if (!playback) return;
+        cancel();
+        update(null, "已停止播放。");
+      });
+    })();
+  </script>
 </body>
 </html>
